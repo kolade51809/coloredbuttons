@@ -1,11 +1,11 @@
-require 'open-uri'  #Requires open uri to import the british dictionary
+require 'open-uri'  #Requires open uri to import the British dictionary
 #Start patching the string class:
 class String
   def colorize(color_code)
-    "\e[#{color_code}m#{self}\e[0m" #ansi sequence that colors text.
+    "\e[#{color_code}m#{self}\e[0m" #ANSI sequence that colours text.
   end
 
-  #All base colors:
+  #All base colours:
 
   def red
     colorize(31)
@@ -45,7 +45,7 @@ end
 #Start Creating Custom Modules:
 module Screen
   def self.clear
-    system 'clear' or system 'cls'  #This both runs clear, and cls, so it is compatible in windows, mac, and linux
+    system 'clear' or system 'cls'  #This both runs clear, and cls, so it is compatible in windows, mac, and Linux
   end
 end
 #Stop Creating Custom Modules
@@ -70,10 +70,10 @@ end
 
 def display_result(win_word, letters_guessed)
   lttr_indx = Array.new #Create a new array that will contain the correct letters index
-  letters_guessed.each { |letter| lttr_indx << check_letter(win_word, letter) } #for each letter, append checkletter with perameters win_word and letter onto crrLttr array.
+  letters_guessed.each { |letter| lttr_indx << check_letter(win_word, letter) } #for each letter, append check letter with parameters win_word and letter onto crrLttr array.
   lttr_indx.join.each_char.map(&:to_i).each_with_object([?_]*win_word.length) { |i,arr| arr[i] = win_word.split('')[i] }
-  #take the string, join it into an array, create the enumerable object each char, map that enumerable object with the perameters (&:to_i) which turns evreything into an integer.
-  #Then, run.each with the object, with the perameters of [?_] multiplied by the length of the word. This effectivly creates an array with only underscores.
+  #take the string, join it into an array, create the enumerable object each char, map that enumerable object with the parameters (&:to_i) which turns everything into an integer.
+  #Then, run.each with the object, with the parameters of [?_] multiplied by the length of the word. This effectively creates an array with only underscores.
   #Then, run an iterator which contains the index of the array, and the array itself.
   #Then, use this iterator to set the passed object with the index i at that location equal to the win_word converted to an array with i at that location.
 end
@@ -81,7 +81,7 @@ end
 def import_dict
   puts 'WARNING: This will take a few seconds'.yellow
   words = []
-  open('http://www.mieliestronk.com/corncob_lowercase.txt') do |f|  #This is were there is a wordlist of the entire british dictionary
+  open('http://www.mieliestronk.com/corncob_lowercase.txt') do |f|  #This is were there is a word list of the entire British dictionary
     f.each_line do |l|
       words.push(l.strip)
     end
@@ -104,7 +104,7 @@ puts 'To quit at any time type: quit'.green
 for i in 0..dict.count #This creates a system that will choose a new word every game.  #TODO: Do .each
   alphabet, wrong_guesses, letters_guessed, win_word = create_alph, 0, [], dict[i]
   puts "\u2588\u2588\u2557  \u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2557   \u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2557   \u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2557   \u2588\u2588\u2557\r\n\u2588\u2588\u2551  \u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557\u2588\u2588\u2588\u2588\u2557  \u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2550\u2550\u255D \u2588\u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557\u2588\u2588\u2588\u2588\u2557  \u2588\u2588\u2551\r\n\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2554\u2588\u2588\u2557 \u2588\u2588\u2551\u2588\u2588\u2551  \u2588\u2588\u2588\u2557\u2588\u2588\u2554\u2588\u2588\u2588\u2588\u2554\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2554\u2588\u2588\u2557 \u2588\u2588\u2551\r\n\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551\u2588\u2588\u2551\u255A\u2588\u2588\u2557\u2588\u2588\u2551\u2588\u2588\u2551   \u2588\u2588\u2551\u2588\u2588\u2551\u255A\u2588\u2588\u2554\u255D\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551\u2588\u2588\u2551\u255A\u2588\u2588\u2557\u2588\u2588\u2551\r\n\u2588\u2588\u2551  \u2588\u2588\u2551\u2588\u2588\u2551  \u2588\u2588\u2551\u2588\u2588\u2551 \u255A\u2588\u2588\u2588\u2588\u2551\u255A\u2588\u2588\u2588\u2588\u2588\u2588\u2554\u255D\u2588\u2588\u2551 \u255A\u2550\u255D \u2588\u2588\u2551\u2588\u2588\u2551  \u2588\u2588\u2551\u2588\u2588\u2551 \u255A\u2588\u2588\u2588\u2588\u2551\r\n\u255A\u2550\u255D  \u255A\u2550\u255D\u255A\u2550\u255D  \u255A\u2550\u255D\u255A\u2550\u255D  \u255A\u2550\u2550\u2550\u255D \u255A\u2550\u2550\u2550\u2550\u2550\u255D \u255A\u2550\u255D     \u255A\u2550\u255D\u255A\u2550\u255D  \u255A\u2550\u255D\u255A\u2550\u255D  \u255A\u2550\u2550\u2550\u255D\r\n                                                                ".super_rainbow
-  #This is unicode for the HANGMAN banner
+  #This is Unicode for the HANGMAN banner
   sleep 4 #Sleep so people can enjoy the banner
   while true  #loop for a single turn
     Screen.clear
@@ -112,11 +112,10 @@ for i in 0..dict.count #This creates a system that will choose a new word every 
     break if wrong_guesses == 7 || !display_result(win_word, letters_guessed).join('').include?('_') #TODO: display result does not include underscores
     puts 'Guess this word: ' << display_result(win_word, letters_guessed).join(' ')
     puts 'Guessed letters: ' << letters_guessed.sort.join(' ')
-    print 'Guess another letter: '
+    print 'Guess a letter: '
     user_guess = gets.chomp
     exit if user_guess == 'quit'
     next unless alphabet.include?(user_guess)
-    alphabet.delete(user_guess)
     letters_guessed << user_guess
     wrong_guesses += 1 if check_letter(win_word, user_guess) == ''
   end
